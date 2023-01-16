@@ -1,0 +1,29 @@
+spring:
+  # db 연결 정보
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    # utf-8 설정 유지할 것!!!
+    url: jdbc:mariadb://192.168.0.113:28306/study?serverTimezone=UTC&characterEncoding=utf8&allowMultiQueries=true
+    hikari:
+      username: root
+      password: 1q2w3e4r5t!@
+      connection-timeout: 5000
+      validation-timeout: 1000
+      maximum-pool-size: 30
+      minimum-idle: 10
+      connection-test-query: SELECT 1
+
+server:
+  servlet:
+    session:
+      timeout: 4m
+
+springdoc:
+  version: 1.6.14
+
+jwt:
+  header: Authorization
+  secret: 252b585d29110ce421d33d66ca4319f3e50dd16596847488edc6dc5f73d52f4749ee5ba8c1e89f9f0c236e7220b18d3d1171568a92ef9cccd863709465859648
+  token-validity-in-seconds: 1
+  access-token-expire-time: 1
+  refresh-token-expire-time: 168

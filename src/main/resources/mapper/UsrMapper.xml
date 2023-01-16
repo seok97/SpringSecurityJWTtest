@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springsecuritystudy202301.sample.dao.UsrDao">
+    <select id="getUsrById"
+            parameterType="java.lang.String"
+            resultType="com.example.springsecuritystudy202301.sample.dto.res.UsrResDto">
+        /** sql ID :  com.example.springsecuritystudy202301.sample.dao.UsrDao.getUsrById */
+        SELECT
+            USR_ID
+            , PSWD
+        FROM
+            TB_USR
+        WHERE
+            USR_ID = #{usrId}
+    </select>
+
+    <select id="getRoles"
+            parameterType="java.lang.String"
+            resultType="java.lang.String">
+        /** sql ID :  com.example.springsecuritystudy202301.sample.dao.UsrDao.getRoles */
+        SELECT TRUM.ROLE_ID
+        FROM TB_ROLE_USR_MAPG TRUM
+        WHERE TRUM.USR_ID = #{usrId}
+    </select>
+
+    <select id="getUsrByIdCount"
+            parameterType="java.lang.String"
+            resultType="java.lang.Integer">
+        /** sql ID :  com.example.springsecuritystudy202301.sample.dao.UsrDao.getUsrByIdCount */
+        SELECT
+            COUNT(*)
+        FROM
+            TB_USR
+        WHERE
+            USR_ID = #{usrId}
+    </select>
+
+    <insert id="insertUsr"
+            parameterType="com.example.springsecuritystudy202301.sample.dto.req.UsrReqDto">
+        /**
+        * SQL ID : com.example.springsecuritystudy202301.sample.dao.UsrDao.insertUsr
+        * SQL 명 : insertUsr
+        */
+        INSERT INTO TB_USR
+        (
+            USR_ID
+            , PSWD
+        )
+        VALUES
+        (
+            #{usrId}
+            , #{password}
+        )
+    </insert>
+</mapper>

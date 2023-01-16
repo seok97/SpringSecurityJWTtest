@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springsecuritystudy202301.sample.dao.RoleUsrMapgDao">
+    <select id="getRoleUsrMapgByUsrId"
+            parameterType="java.lang.String"
+            resultType="com.example.springsecuritystudy202301.sample.dto.res.RoleUsrMapgResDto">
+        SELECT
+            USR_ID
+             , ROLE_ID
+        FROM
+            TB_ROLE_USR_MAPG
+        WHERE
+            USR_ID = #{usrId}
+    </select>
+</mapper>

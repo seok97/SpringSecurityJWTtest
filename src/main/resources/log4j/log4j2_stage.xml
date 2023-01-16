@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN" value="[%5p] [%d{yyyy-MM-dd HH:mm:ss}] [%C{6}] - %m%n"></Property>
+		<Property name="LOG_FILE_PATH">/logs/mgmtsvc/was/tomcat/service.log</Property>
+	</Properties>
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+			<PatternLayout>
+				<MarkerPatternSelector defaultPattern="${LOG_PATTERN}">
+					<PatternMatch key="TLOCALLLOG" pattern="%m%n" />
+					<PatternMatch key="MQLISTENERCHECK" pattern="[%d{yyyy-MM-dd HH:mm:ss}] %m%n" />
+				</MarkerPatternSelector>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="file" fileName="${LOG_FILE_PATH}" filePattern="${LOG_FILE_PATH}.%d{yyyyMMdd}">
+			<PatternLayout>
+				<MarkerPatternSelector defaultPattern="${LOG_PATTERN}">
+					<PatternMatch key="TLOCALLLOG" pattern="%m%n" />
+				</MarkerPatternSelector>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender"/>
+			<AppenderRef ref="file"/>
+		</Logger>
+
+		<Logger name="springfox" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender"/>
+			<AppenderRef ref="file"/>
+		</Logger>
+
+		<Logger name="co.kr.lguplus" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender">
+				<Filters>
+					<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+					<MarkerFilter marker="MYBATIS" onMatch="DENY" onMismatch="NEUTRAL" />
+				</Filters>
+			</AppenderRef>
+			<AppenderRef ref="file">
+				<Filters>
+					<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+					<MarkerFilter marker="MYBATIS" onMatch="DENY" onMismatch="NEUTRAL" />
+				</Filters>
+			</AppenderRef>
+		</Logger>
+		<Root level="DEBUG">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="file" />
+		</Root>
+	</Loggers>
+</Configuration>

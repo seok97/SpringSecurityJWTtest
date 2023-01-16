@@ -1,0 +1,28 @@
+server:
+  # was ?? ??
+  port: 9090
+  # was ???? root ??
+  servlet:
+    context-path: /swh/api
+    # ?? ???? ??
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: co.kr.aiteam
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+
+springdoc:
+  version: 1.6.14
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: true
+    operations-sorter: alpha
+    tags-sorter: alpha
+    default-models-expand-depth: -1
+    csrf:
+      enabled: true
+    path: /swagger-ui.html
+    api-docs:
+      path: /api-docs
